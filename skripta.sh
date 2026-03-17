@@ -22,12 +22,12 @@ sudo chmod 664 "$GTK_DIR/asm.lang"
 
 # --- Overrides.xml ---
 MIME_DIR="/usr/share/mime/packages"
-echo -e "\033[92mKopiranje ili azuriranje Overrides.xml...\033[0m"
-if [ ! -f "$MIME_DIR/Overrides.xml" ]; then
-    sudo cp Overrides.xml "$MIME_DIR/"
-else
-    sudo sh -c "cat Overrides.xml >> $MIME_DIR/Overrides.xml"
+echo -e "\033[92mPostavljanje Overrides.xml...\033[0m"
+if [ -f "$MIME_DIR/Overrides.xml" ]; then
+    echo -e "\033[93mPostojeci Overrides.xml sacuvan kao Overrides.xml.bak\033[0m"
+    sudo mv "$MIME_DIR/Overrides.xml" "$MIME_DIR/Overrides.xml.bak"
 fi
+sudo cp Overrides.xml "$MIME_DIR/"
 sudo update-mime-database /usr/share/mime
 
 # --- Brisanje stare DDD konfiguracije ---
